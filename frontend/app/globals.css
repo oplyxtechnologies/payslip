@@ -1,0 +1,31 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #f9fafb;
+  --foreground: #000000;
+}
+
+/* Force light mode - disable dark mode */
+body {
+  color: #000000;
+  background: #f9fafb;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Ensure inputs and form elements have dark text */
+input, textarea, select {
+  color: #000000;
+}
+
+/* Ensure placeholder text is visible */
+input::placeholder, textarea::placeholder {
+  color: #9ca3af;
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
