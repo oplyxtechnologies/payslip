@@ -1,9 +1,9 @@
-import express from 'express';
+import express, { Request, Response } from 'express';
 import cors from 'cors';
 import payslipRouter from './routes/payslip';
 
 const app = express();
-const PORT = process.env.BACKEND_PORT || 3001;
+const PORT = process.env.PORT || 5000;
 const NODE_ENV = process.env.NODE_ENV || 'development';
 const FRONTEND_URL = process.env.FRONTEND_URL || 'http://localhost:3000';
 
@@ -15,7 +15,7 @@ const allowedOrigins = [
 ];
 
 app.use(cors({
-  origin: (origin, callback) => {
+  origin: (origin: string | undefined, callback: (err: Error | null, allow?: boolean) => void) => {
     // Allow requests with no origin (like mobile apps or curl)
     if (!origin) return callback(null, true);
     
@@ -34,7 +34,7 @@ app.use(express.json({ limit: '10mb' })); // Increased limit for base64 images
 app.use('/api/payslip', payslipRouter);
 
 // Health check
-app.get('/health', (req, res) => {
+app.get('/health', (req: Request, res: Response) => {
   res.json({ 
     status: 'ok',
     environment: NODE_ENV,
