@@ -2,6 +2,7 @@
 
 import { Payslip, OrganizationSettings, LineItem } from '@/lib/types';
 import { calculateTotal, formatCurrency } from '@/lib/utils';
+import { API_BASE } from '@/lib/config';
 import { useState } from 'react';
 
 interface PayslipFormProps {
@@ -65,8 +66,7 @@ export default function PayslipForm({ payslip, setPayslip, settings }: PayslipFo
 
     setIsExporting(true);
     try {
-      const apiBase = process.env.NEXT_PUBLIC_API_BASE || 'http://localhost:3001';
-      const response = await fetch(`${apiBase}/api/payslip/pdf`, {
+      const response = await fetch(`${API_BASE}/api/payslip/pdf`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
