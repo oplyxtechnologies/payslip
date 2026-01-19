@@ -3,7 +3,10 @@ import cors from 'cors';
 import payslipRouter from './routes/payslip';
 
 const app = express();
-const PORT = process.env.PORT || 5000;
+// Robust port parsing: Ensure PORT is a valid number, otherwise fallback to 5000
+// This prevents crashes if the user accidentally sets PORT to a URL in the dashboard
+const envPort = parseInt(process.env.PORT as string, 10);
+const PORT = (!isNaN(envPort) && envPort > 0) ? envPort : 5000;
 const NODE_ENV = process.env.NODE_ENV || 'development';
 const FRONTEND_URL = process.env.FRONTEND_URL || 'http://localhost:3000';
 
