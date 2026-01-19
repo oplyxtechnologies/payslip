@@ -191,7 +191,7 @@ Go back to your backend (Render/Railway) and update `FRONTEND_URL`:
 
 | Variable | Required | Default | Description |
 |----------|----------|---------|-------------|
-| `PORT` | No | `5000` | Server port (auto-set by platform) |
+| `PORT` | No | `3001` | Server port (auto-set by platform) |
 | `NODE_ENV` | Yes | `development` | Set to `production` |
 | `FRONTEND_URL` | Yes | `http://localhost:3000` | Your Vercel frontend URL |
 
@@ -331,7 +331,7 @@ Puppeteer requires ~512MB RAM.
 
 **Look for:**
 ```
-✅ Backend server running on port 5000
+✅ Backend server running on port 3001
 ```
 
 If not present, check for errors in logs.
@@ -415,7 +415,7 @@ npm run build
 
 # Create .env file
 cat > .env << EOF
-PORT=5000
+PORT=3001
 NODE_ENV=production
 FRONTEND_URL=http://your-domain.com
 EOF
@@ -434,7 +434,7 @@ npm install
 
 # Create .env.production
 cat > .env.production << EOF
-NEXT_PUBLIC_API_BASE=http://your-domain.com:5000
+NEXT_PUBLIC_API_BASE=http://your-domain.com:3001
 EOF
 
 npm run build
@@ -472,7 +472,7 @@ server {
 
     # Backend API
     location /api {
-        proxy_pass http://localhost:5000;
+        proxy_pass http://localhost:3001;
         proxy_http_version 1.1;
         proxy_set_header Host $host;
         proxy_set_header X-Real-IP $remote_addr;
@@ -480,7 +480,7 @@ server {
 
     # Backend Health
     location /health {
-        proxy_pass http://localhost:5000;
+        proxy_pass http://localhost:3001;
     }
 }
 ```
